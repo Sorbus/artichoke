@@ -1,3 +1,11 @@
+#!/usr/bin/python
+
+#-----------------------------------------------------------------------
+# twitter-authorize:
+#  - step through the process of creating and authorization a
+#    Twitter application.
+#-----------------------------------------------------------------------
+
 import twitter
 import time
 
