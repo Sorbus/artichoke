@@ -17,7 +17,11 @@ def worker(signal, user, queue, args):
                     config.access_secret,
                     config.consumer_key,
                     config.consumer_secret))
-
+  
+  date, hour, results = gather(user, twitter, args)
+  interpret(date, hour, results, queue, signal, args)
+                    
+def gather(user, twitter, args):
   results = twitter.statuses.user_timeline(screen_name = user, count = args.number)
 
   date = {}
@@ -44,6 +48,9 @@ def worker(signal, user, queue, args):
     except KeyError:
       hour[status['created_at'][11:13]] = 1
       
+  return (date, hour, results)
+
+def interpret(date, hour, results, queue, signal, args):
   peak = list(date.keys())[0]
   med = []
       
