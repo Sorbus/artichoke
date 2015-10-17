@@ -9,20 +9,21 @@
 import config
 import multiprocessing
 import sys
+import argparse
 from queue import Queue
 from time import sleep
 from datetime import datetime
 from datetime import timedelta
 from twitter import *
 
-def worker(signal, user, queue):
+def worker(signal, user, queue, n):
   twitter = Twitter(
       auth = OAuth( config.access_key,
                     config.access_secret,
                     config.consumer_key,
                     config.consumer_secret))
 
-  results = twitter.statuses.user_timeline(screen_name = user, count = 100)
+  results = twitter.statuses.user_timeline(screen_name = user, count = n)
 
   date = {}
   hour = {}
@@ -70,15 +71,25 @@ def worker(signal, user, queue):
   return
 
 if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+
+  parser.add_argument("-n", "--number", help="number of tweets to fetch (default: 100)", type=int, default=100)
+  parser.add_argument("-u", "--username", help="user to gather information about")
+
+  args = parser.parse_args()
+
+  if not args.username:
+    print('User to query: ', end='')
+    user = input()
+  else:
+    user = args.username
+
   queue = multiprocessing.Queue()
   signal = multiprocessing.Event()
                     
-  print('User to query: ', end='')
-  user = input()
-  
-  p = multiprocessing.Process(target=worker, args=(signal,user,queue,))
+  p = multiprocessing.Process(target=worker, args=(signal,user,queue,args.number,))
   p.start()
-      
+    
   print()
   message = "Thinking ..."
   pointer = 0
@@ -96,5 +107,4 @@ if __name__ == '__main__':
   while not queue.empty():
     print(queue.get(True))
     sleep(0.04)
-      
-  
+    
