@@ -22,10 +22,11 @@ python3 main.py [OPTIONS]
 
 #### Options
 
-* -n NUMBER  
-    Number of tweets to fetch, between 1 and 3200.  
-* -u USERNAME  
-    Name of target account.  
+    -h, --help            show this help message and exit
+    -n NUMBER, --number NUMBER
+                          number of tweets to fetch (default: 100)
+    -u USERNAME, --username USERNAME
+                          user to gather information about
 
 ### Sample output:
 
