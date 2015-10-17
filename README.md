@@ -43,7 +43,6 @@ Run [authorize.py](https://github.com/ideoforms/python-twitter-examples/blob/mas
     Median tweets per day: 1
     Peak tweets: 10 on Mar 20 2015
     Tweets distribution by hour (+00 GMT):
-    Scale factor: 1
     00: |||||||||||||||
     01: ||||||
     02: |

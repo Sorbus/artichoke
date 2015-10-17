@@ -82,7 +82,7 @@ def interpret(date, hour, results, queue, signal, args):
     queue.put('Tweets distribution by hour (+00 GMT):')  
     if (high/factor) > (args.width - 10):
       factor = high / (args.width - 10)
-    queue.put('Scale factor: ' + str(round(factor,2)))
+#    queue.put('Scale factor: ' + str(round(factor,2)))
     for each in sorted(hour.keys()):
       queue.put(each + ': ' + '|'*int(hour[each]/factor))
   
