@@ -18,21 +18,22 @@ artichoke is designed for python 3.4, and depends on [Python Twitter Tools](http
 
 Run [authorize.py](https://github.com/ideoforms/python-twitter-examples/blob/master/twitter-authorize.py), and follow its instructions to create and authorize the twitter application.
 
-python3 main.py [-h] [-n NUMBER] [-u USERNAME] [-f] [-r] [-t] [-v] [-C] [-w WIDTH]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -n NUMBER, --number NUMBER
-                        number of tweets to fetch (default: 100, max: 3200)
-  -u USERNAME, --username USERNAME
-                        user to gather information about
-  -f, --friends         gather information about accounts the user is following
-  -r, --no-retweets     do not include retweets in statistics
-  -t, --no-time         omit information about hourly activity
-  -v, --vertical        display a vertical bar chart instead of a horizontal bar chart
-  -C, --concise         only print results (note: no prompt for username will appear)
-  -w WIDTH, --width WIDTH
-                        width of bar chart to print (default: width of terminal)
+    main.py [-h] [-n NUMBER] [-u USERNAME] [-f] [-r] [-t] [-v] [-C] [-w WIDTH]  
+    
+    optional arguments:  
+    -h, --help            show this help message and exit  
+    -n NUMBER, --number NUMBER  
+                          number of tweets to fetch (default: 100, max: 3200)  
+    -u USERNAME, --username USERNAME  
+                          user to gather information about  
+    -s, --self            gather information about yourself  
+    -f, --friends         gather information about accounts the user is following  
+    -r, --no-retweets     do not include retweets in statistics  
+    -t, --no-time         omit information about hourly activity  
+    -v, --vertical        display a vertical bar chart instead of a horizontal bar chart  
+    -C, --concise         only print results
+    -w WIDTH, --width WIDTH  
+                          width of bar chart (default: width of terminal pr 80)  
 
 ### Sample output:
 
