@@ -16,14 +16,14 @@ from datetime import datetime
 from datetime import timedelta
 from twitter import *
 
-def worker(signal, user, queue, n):
+def worker(signal, user, queue, args):
   twitter = Twitter(
       auth = OAuth( config.access_key,
                     config.access_secret,
                     config.consumer_key,
                     config.consumer_secret))
 
-  results = twitter.statuses.user_timeline(screen_name = user, count = n)
+  results = twitter.statuses.user_timeline(screen_name = user, count = args.number)
 
   date = {}
   hour = {}
@@ -87,7 +87,7 @@ if __name__ == '__main__':
   queue = multiprocessing.Queue()
   signal = multiprocessing.Event()
                     
-  p = multiprocessing.Process(target=worker, args=(signal,user,queue,args.number,))
+  p = multiprocessing.Process(target=worker, args=(signal,user,queue,args,))
   p.start()
     
   print()
