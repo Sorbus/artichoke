@@ -1,3 +1,11 @@
+#!/usr/bin/python
+
+#-----------------------------------------------------------------------
+# artichoke:
+#  - A small program which gathers basic information about twitter user habits.
+#  - https://github.com/Sorbus/artichoke
+#-----------------------------------------------------------------------
+
 import config
 import multiprocessing
 import sys
