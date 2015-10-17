@@ -77,9 +77,14 @@ def interpret(date, hour, results, queue, signal, args):
   queue.put('Peak tweets: ' + str(date[peak]) + ' on ' + peak)
 
   if args.time:
-    queue.put('Tweets by hour (+00 GMT):')  
+    factor = 1
+    high = hour[max(hour, key=hour.get)]
+    queue.put('Tweets distribution by hour (+00 GMT):')  
+    if (high/factor) > (args.width - 10):
+      factor = high / (args.width - 10)
+    queue.put('Scale factor: ' + str(round(factor,2)))
     for each in sorted(hour.keys()):
-      queue.put(each + ': ' + '|'*hour[each])
+      queue.put(each + ': ' + '|'*int(hour[each]/factor))
   
   signal.set()
   return

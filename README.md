@@ -18,48 +18,52 @@ artichoke is designed for python 3.4, and depends on [Python Twitter Tools](http
 
 Run [authorize.py](https://github.com/ideoforms/python-twitter-examples/blob/master/twitter-authorize.py), and follow its instructions to create and authorize the twitter application.
 
-python3 main.py [OPTIONS]
+python3 main.py [-h] [-n NUMBER] [-u USERNAME] [-f] [-r] [-t] [-v] [-C] [-w WIDTH]
 
-#### Options
-
-    -h, --help            show this help message and exit
-    -n NUMBER, --number NUMBER
-                          number of tweets to fetch (default: 100)
-    -u USERNAME, --username USERNAME
-                          user to gather information about
+optional arguments:
+  -h, --help            show this help message and exit
+  -n NUMBER, --number NUMBER
+                        number of tweets to fetch (default: 100, max: 3200)
+  -u USERNAME, --username USERNAME
+                        user to gather information about
+  -f, --friends         gather information about accounts the user is following
+  -r, --no-retweets     do not include retweets in statistics
+  -t, --no-time         omit information about hourly activity
+  -v, --vertical        display a vertical bar chart instead of a horizontal bar chart
+  -C, --concise         only print results (note: no prompt for username will appear)
+  -w WIDTH, --width WIDTH
+                        width of bar chart to print (default: width of terminal)
 
 ### Sample output:
 
-    User to query: twitter
-    
-    Thinking ....... done!
-    
-    Total tweets found: 100
-    Average tweets per day: 1.852
-    Median tweets per day: 2
-    Peak tweets: 6 on Oct 06 2015
-    Tweets by hour (+00 GMT):
-    00: ||||
-    01: |||
-    02:
+    > python .\main.py -n 300 -C -u twitter
+    Total tweets found: 300
+    Average tweets per day: 1.807
+    Median tweets per day: 1
+    Peak tweets: 10 on Mar 20 2015
+    Tweets distribution by hour (+00 GMT):
+    Scale factor: 1
+    00: |||||||||||||||
+    01: ||||||
+    02: |
     03:
-    04:
-    05:
-    06:
-    07:
+    04: |
+    05: |
+    06: ||
+    07: |
     08:
     09:
     10:
     11: |
     12:
-    13: |||
-    14: |||||
-    15: |||||
-    16: ||||||||||||
-    17: ||||||||||||||
-    18: |||||||||
-    19: |||||||||||||
-    20: ||||||||
-    21: ||||||||||
-    22: ||||||||
-    23: |||||
+    13: |||||||
+    14: |||||||||||
+    15: ||||||||||
+    16: |||||||||||||||||||||||||||||||||||||||||||||||||
+    17: ||||||||||||||||||||||||||||||||||||||||||||||||||
+    18: |||||||||||||||||||||||||||||
+    19: |||||||||||||||||||||||||||||||||
+    20: ||||||||||||||||||||
+    21: ||||||||||||||||||||||||||||
+    22: |||||||||||||||||||
+    23: ||||||||||||||||
