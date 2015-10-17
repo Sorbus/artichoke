@@ -6,10 +6,10 @@
 #-----------------------------------------------------------------------
 
 import config
+from time import sleep
 from twitter import *
 from datetime import datetime
 from datetime import timedelta
-from twitter import *
 
 def worker(signal, user, queue, args):
   twitter = Twitter(
@@ -22,11 +22,21 @@ def worker(signal, user, queue, args):
   interpret(date, hour, results, queue, signal, args)
                     
 def gather(user, twitter, args):
-  results = twitter.statuses.user_timeline(screen_name = user, count = args.number)
+  if args.number > 200:
+    results = twitter.statuses.user_timeline(screen_name = user, count = 200, include_rts = args.retweets)
+    args.number -= 200
+    while args.number > 0:
+      last = results[len(results)-1]['id']
+      results += twitter.statuses.user_timeline(screen_name = user, count = args.number, include_rts = args.retweets, max_id = (last-1))
+      args.number -= 200
+      if last == results[len(results)-1]['id']:
+        break;
+  else:
+    results = twitter.statuses.user_timeline(screen_name = user, count = args.number, include_rts = args.retweets)
 
   date = {}
   hour = {}
-
+  
   start = results[len(results)-1]['created_at']
   start = datetime.strptime(start, '%a %b %d %H:%M:%S +0000 %Y')
 
@@ -66,8 +76,10 @@ def interpret(date, hour, results, queue, signal, args):
   queue.put('Median tweets per day: ' + str(med))
   queue.put('Peak tweets: ' + str(date[peak]) + ' on ' + peak)
 
-  queue.put('Tweets by hour (+00 GMT):')  
-  for each in sorted(hour.keys()):
-    queue.put(each + ': ' + '|'*hour[each])
+  if args.time:
+    queue.put('Tweets by hour (+00 GMT):')  
+    for each in sorted(hour.keys()):
+      queue.put(each + ': ' + '|'*hour[each])
+  
   signal.set()
   return
