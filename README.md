@@ -18,7 +18,14 @@ artichoke is designed for python 3.4, and depends on [Python Twitter Tools](http
 
 Run [authorize.py](https://github.com/ideoforms/python-twitter-examples/blob/master/twitter-authorize.py), and follow its instructions to create and authorize the twitter application.
 
-Run main.py [-n #]
+python3 main.py [OPTIONS]
+
+#### Options
+
+* -n NUMBER  
+    Number of tweets to fetch, between 1 and 3200.  
+* -u USERNAME  
+    Name of target account.  
 
 ### Sample output:
 
