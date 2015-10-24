@@ -79,7 +79,7 @@ def interpret(date, hour, results, queue, signal, args):
   if args.time:
     factor = 1
     high = hour[max(hour, key=hour.get)]
-    queue.put('Tweets distribution by hour (+00 GMT):')  
+    queue.put('Tweet distribution by hour (+00 GMT):')  
     if (high/factor) > (args.width - 10):
       factor = high / (args.width - 10)
 #    queue.put('Scale factor: ' + str(round(factor,2)))

@@ -42,7 +42,7 @@ Run [authorize.py](https://github.com/ideoforms/python-twitter-examples/blob/mas
     Average tweets per day: 1.807
     Median tweets per day: 1
     Peak tweets: 10 on Mar 20 2015
-    Tweets distribution by hour (+00 GMT):
+    Tweet distribution by hour (+00 GMT):
     00: |||||||||||||||
     01: ||||||
     02: |
