@@ -80,11 +80,28 @@ def interpret(date, hour, results, queue, signal, args):
     factor = 1
     high = hour[max(hour, key=hour.get)]
     queue.put('Tweet distribution by hour (+00 GMT):')  
-    if (high/factor) > (args.width - 10):
-      factor = high / (args.width - 10)
-#    queue.put('Scale factor: ' + str(round(factor,2)))
-    for each in sorted(hour.keys()):
-      queue.put(each + ': ' + '|'*int(hour[each]/factor))
+    if args.vertical:
+      ordered = sorted(hour.keys())
+      factor = high / 10
+      for i in range(9,0,-1):
+        line = ""
+        for each in ordered:
+          if int(hour[each]) > (factor * i):
+            line += "||"
+          else:
+            line += "  "
+          line += "  "
+        queue.put(line)
+      line = ""
+      for each in ordered:
+        line += (each + "  ")
+      queue.put(line)
+    else:
+      if (high/factor) > (args.width - 10):
+        factor = high / (args.width - 10)
+  #    queue.put('Scale factor: ' + str(round(factor,2)))
+      for each in sorted(hour.keys()):
+        queue.put(each + ': ' + '|'*int(hour[each]/factor))
   
   signal.set()
   return
